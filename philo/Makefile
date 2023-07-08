@@ -1,0 +1,45 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/03 14:48:12 by fkrug             #+#    #+#              #
+#    Updated: 2023/07/03 15:10:47 by fkrug            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	:= philo
+
+OPSYS := $(shell uname)
+ifeq ($(OPSYS), Linux)
+	CC := gcc
+	DB := gdb
+else ifeq ($(OPSYS), Darwin)
+	CC := cc
+	DB := lldb
+endif
+CFLAGS := 
+#-Wextra -Wall -Werror 
+HEADERS	:= -I ./include
+SRCS	:= main.c
+OBJS	:= ${SRCS:.c=.o}
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@$(CC) $(OBJS) $(HEADERS) -pthread -o $(NAME)
+
+$(OBJS): %.o:%.c
+	@$(CC) $(CFLAGS) -c $< $(HEADERS) -o $@ && printf "Compiling: $(notdir $<)\n"
+
+clean:
+	@rm -f $(OBJS)
+
+fclean: clean
+	@rm -f $(NAME)
+
+re: clean all
+
+.PHONY: all clean fclean re
