@@ -6,14 +6,14 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/08 13:14:16 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/10 09:04:41 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "philo.h"
 
 pthread_mutex_t	mutex;
 
@@ -27,10 +27,10 @@ void *myThreadFun(void *vargp)
 		*value = *value + 1;
 	}
 	// printf("Value: %d\n", *value);
-	return (*value);
+	return (value);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	int			i;
 	int			*res = 0;
@@ -39,6 +39,8 @@ int	main(void)
 
 
 	//pthread_mutex_init(&mutex, NULL);
+	if (argc != 5)
+		return (ft_error_mgmt(MISSING_ARG));
 	i = -1;
 	while (++i < 3)
 	{
@@ -52,7 +54,7 @@ int	main(void)
 			return (EXIT_FAILURE);
 	}
 	//pthread_mutex_destroy(&mutex);
-	printf("Value: %d\n", );
+	//printf("Value: %d\n", );
 	pthread_exit(NULL);
 	return (1);
 }
