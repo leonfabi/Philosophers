@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 08:56:09 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/10 09:18:03 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/10 10:09:52 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,15 @@ int	ft_error_mgmt(int errno)
 {
 	if (errno == MISSING_ARG)
 		printf(MISSING_ARG_MSG);
-	return (0);
+	if (errno == NO_NUMBER)
+		printf(NO_NUMBER_MSG);
+	if (errno == LIMIT)
+		printf(LIMIT_MSG);
+	if (errno == NEG_NUMBER)
+		printf(NEG_NUMBER_MSG);
+	if (errno == PHIL_RANGE)
+		printf(PHIL_RANGE_MSG);
+	return (1);
 }
 
 int	ft_isdigit(int c)
@@ -26,10 +34,10 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int	ft_atoi(const char *nptr)
+long long	ft_atoi(const char *nptr)
 {
-	int	n;
-	int	sign;
+	long long	n;
+	int			sign;
 
 	n = 0;
 	sign = 1;
@@ -54,9 +62,25 @@ int	ft_atoi(const char *nptr)
 
 int	ft_input_check(int argc, char **argv)
 {
-	int		count;
+	int		c_0;
+	int		c_1;
 	char	*str;
 
-	count = 1;
-	
+	c_0 = 1;
+	c_1 = 0;
+	while (c_0 < argc)
+	{
+		c_1 = 0;
+		str = argv[c_0];
+		while (str[c_1])
+		{
+			if (c_1 != 0 && (str[c_1] == '-' || str[c_1] == '+'))
+				return (ft_error_mgmt(NO_NUMBER));
+			else if (!ft_isdigit(str[c_1]) && c_1 != 0)
+				return (ft_error_mgmt(NO_NUMBER));
+			c_1++;
+		}
+		c_0++;
+	}
+	return (0);
 }
