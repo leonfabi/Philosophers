@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/03 15:56:22 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/08 09:46:16 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void *myThreadFun(void *vargp)
 int	main(void)
 {
 	int			i;
-	pthread_t	tid;
+	pthread_t	tid[3];
 
 	i = -1;
 	while (++i < 3)
-		pthread_create(&tid, NULL, myThreadFun, (void *)&tid);
+		pthread_create(&tid[i], NULL, myThreadFun, (void *)&tid[i]);
 	pthread_exit(NULL);
 	return (1);
 }
