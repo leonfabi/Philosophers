@@ -6,17 +6,11 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/10 11:22:55 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/10 11:32:32 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_init_threads(t_table *table)
-{
-	
-	return (0);
-}
 
 int	ft_init(int argc, char **argv, t_table *table)
 {

@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 08:56:09 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/10 10:09:52 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/10 13:55:21 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,9 @@ int	ft_input_check(int argc, char **argv)
 		c_0++;
 	}
 	return (0);
+}
+
+void	ft_free(t_table *table)
+{
+	free(table->philo);
 }

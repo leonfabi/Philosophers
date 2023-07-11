@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/10 10:20:42 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/11 13:08:15 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define PHILO_H
 # include <stdio.h>
 # include <sys/time.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 # define MISSING_ARG_MSG "Error: Missing arguments\n"
 # define NO_NUMBER_MSG "Error: Not a number\n"
@@ -44,10 +47,19 @@ enum e_error
 	PHIL_RANGE
 };
 
+struct s_table;
+
 typedef struct s_philo
 {
-	int		state;
-	int		number;
+	struct s_table	*table;
+	int				state;
+	int				id;
+	pthread_t		thread_id;
+	pthread_t		mon_id;
+	pthread_mutex_t	l_fork;
+	pthread_mutex_t	*r_fork;
+	struct timeval	time;
+	struct timeval	start_time;
 }	t_philo;
 
 typedef struct s_table
@@ -57,12 +69,15 @@ typedef struct s_table
 	int		time_e;
 	int		time_s;
 	int		n_eat;
-	t_philo	philo;
+	int		dead;
+	t_philo	*philo;
 }	t_table;
 
 int			ft_error_mgmt(int errno);
 int			ft_input_check(int argc, char **argv);
 long long	ft_atoi(const char *nptr);
 int	ft_init(int argc, char **argv, t_table *table);
+int	ft_init_threads(t_table *table);
+void	ft_free(t_table *table);
 
 #endif
