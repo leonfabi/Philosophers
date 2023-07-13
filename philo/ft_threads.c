@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/13 12:27:31 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/13 13:14:35 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ void *myMonFunc(void *vargp)
 	double	tmp = philo->table->time_d;
 	gettimeofday(&philo->start_time, NULL);
 	gettimeofday(&philo->time, NULL);
-	//pthread_mutex_lock(&philo->l_fork);
-	while (tmp >= 0)
+	while (philo->time_to_die >= 0)
 	{
 		// printf("Start time: %d Remaining time: %f Philosopher %d %s",philo->start_time.tv_usec, tmp, philo->id, THINK_MSG);
 		gettimeofday(&philo->time, NULL);
 		// usleep(500000);
-		tmp = (double)(philo->table->time_d * 1000 + ((philo->start_time.tv_sec - philo->time.tv_sec) * 1000000 + philo->start_time.tv_usec - philo->time.tv_usec)) / 1000000;
+		philo->time_to_die = (double)(philo->table->time_d * 1000 + ((philo->start_time.tv_sec - philo->time.tv_sec) * 1000000 + philo->start_time.tv_usec - philo->time.tv_usec)) / 1000000;
 	}
 	pthread_mutex_lock(&philo->table->lock);
 	if (philo->table->dead == 0)
+	{
+		philo->table->dead = 1;
 		printf("Philosopher %d %s", philo->id, DEAD_MSG);
-	philo->table->dead = 1;
+	}
 	pthread_mutex_unlock(&philo->table->lock);
-	//pthread_mutex_unlock(&philo->l_fork);
 	return (NULL);
 }
 
@@ -50,6 +50,8 @@ void *myPhiloFunc(void *vargp)
 		printf("Philosopher %d %s", philo->id, EAT_MSG);
 		usleep(philo->table->time_e * 1000);
 		philo->state = EAT;
+		gettimeofday(&philo->start_time, NULL);
+		gettimeofday(&philo->time, NULL);
 		pthread_mutex_unlock(philo->r_fork);
 		pthread_mutex_unlock(&philo->l_fork);
 		printf("Philosopher %d %s", philo->id, SLEEP_MSG);
@@ -66,6 +68,7 @@ int	ft_init_philo(t_table *table, int count)
 {
 	table->philo[count].id = count + 1;
 	table->philo[count].state = THINK;
+	table->philo[count].time_to_die = table->time_d;
 	table->philo[count].table = table;
 	pthread_mutex_init(&table->philo[count].l_fork, NULL);
 	if (count < table->n_phil - 1)

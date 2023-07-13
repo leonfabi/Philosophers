@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/13 12:07:46 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/13 13:11:17 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_philo
 	pthread_t		mon_id;
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	*r_fork;
+	double			time_to_die;
 	struct timeval	time;
 	struct timeval	start_time;
 }	t_philo;
