@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/13 13:14:35 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/14 12:28:40 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void *myMonFunc(void *vargp)
 	gettimeofday(&philo->time, NULL);
 	while (philo->time_to_die >= 0)
 	{
-		// printf("Start time: %d Remaining time: %f Philosopher %d %s",philo->start_time.tv_usec, tmp, philo->id, THINK_MSG);
+		printf("Start time: %ld Remaining time: %f Philosopher %d %s",philo->start_time.tv_usec, philo->time_to_die, philo->id, THINK_MSG);
 		gettimeofday(&philo->time, NULL);
 		// usleep(500000);
 		philo->time_to_die = (double)(philo->table->time_d * 1000 + ((philo->start_time.tv_sec - philo->time.tv_sec) * 1000000 + philo->start_time.tv_usec - philo->time.tv_usec)) / 1000000;
@@ -48,14 +48,16 @@ void *myPhiloFunc(void *vargp)
 		pthread_mutex_lock(philo->r_fork);
 		printf("Philosopher %d %s", philo->id, FORK_MSG);
 		printf("Philosopher %d %s", philo->id, EAT_MSG);
-		usleep(philo->table->time_e * 1000);
+		ft_sleep(philo->table->time_e);
+		//usleep(philo->table->time_e * 1000);
 		philo->state = EAT;
 		gettimeofday(&philo->start_time, NULL);
 		gettimeofday(&philo->time, NULL);
 		pthread_mutex_unlock(philo->r_fork);
 		pthread_mutex_unlock(&philo->l_fork);
 		printf("Philosopher %d %s", philo->id, SLEEP_MSG);
-		usleep(philo->table->time_s * 1000);
+		ft_sleep(philo->table->time_s);
+		//usleep(philo->table->time_s * 1000);
 	}
 	if (pthread_join(philo->mon_id, NULL) != 0)
 		return (NULL);
