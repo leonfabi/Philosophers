@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/14 12:19:58 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/15 13:41:55 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ typedef struct s_philo
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	*r_fork;
 	double			time_to_die;
-	struct timeval	time;
-	struct timeval	start_time;
+	__uint64_t	start_t;
 }	t_philo;
 
 typedef struct s_table
@@ -82,5 +81,6 @@ int	ft_init(int argc, char **argv, t_table *table);
 int	ft_init_threads(t_table *table);
 void	ft_free(t_table *table);
 void	ft_sleep(__uint64_t ms);
+__uint64_t	ft_gettime(void);
 
 #endif

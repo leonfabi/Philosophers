@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/14 12:28:40 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/15 13:42:49 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,11 @@
 void *myMonFunc(void *vargp)
 {
 	t_philo *philo = (t_philo *)vargp;
-	double	tmp = philo->table->time_d;
-	gettimeofday(&philo->start_time, NULL);
-	gettimeofday(&philo->time, NULL);
-	while (philo->time_to_die >= 0)
+
+	philo->start_t = ft_gettime();
+	while (philo->time_to_die > 0)
 	{
-		printf("Start time: %ld Remaining time: %f Philosopher %d %s",philo->start_time.tv_usec, philo->time_to_die, philo->id, THINK_MSG);
-		gettimeofday(&philo->time, NULL);
-		// usleep(500000);
-		philo->time_to_die = (double)(philo->table->time_d * 1000 + ((philo->start_time.tv_sec - philo->time.tv_sec) * 1000000 + philo->start_time.tv_usec - philo->time.tv_usec)) / 1000000;
+		philo->time_to_die = philo->table->time_d + (long long)(philo->start_t - ft_gettime());
 	}
 	pthread_mutex_lock(&philo->table->lock);
 	if (philo->table->dead == 0)
@@ -51,10 +47,9 @@ void *myPhiloFunc(void *vargp)
 		ft_sleep(philo->table->time_e);
 		//usleep(philo->table->time_e * 1000);
 		philo->state = EAT;
-		gettimeofday(&philo->start_time, NULL);
-		gettimeofday(&philo->time, NULL);
 		pthread_mutex_unlock(philo->r_fork);
 		pthread_mutex_unlock(&philo->l_fork);
+		philo->start_t = ft_gettime();
 		printf("Philosopher %d %s", philo->id, SLEEP_MSG);
 		ft_sleep(philo->table->time_s);
 		//usleep(philo->table->time_s * 1000);
