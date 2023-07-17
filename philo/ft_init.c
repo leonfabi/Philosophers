@@ -6,11 +6,25 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 18:12:49 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/17 19:03:02 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	ft_init_table(t_table *table)
+{
+	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->n_phil);
+	if (!table->philo)
+	{
+		free(table->philo);
+		table->philo = NULL;
+		return (EXIT_FAILURE);
+	}
+	pthread_mutex_init(&table->lock, NULL);
+	table->dead = 0;
+	return (ft_init_threads(table));
+}
 
 int	ft_init(int argc, char **argv, t_table *table)
 {
@@ -37,5 +51,5 @@ int	ft_init(int argc, char **argv, t_table *table)
 		else if (count == 4)
 			table->time_s = (int)number;
 	}
-	return (ft_init_threads(table));
+	return (ft_init_table(table));
 }

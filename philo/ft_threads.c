@@ -6,38 +6,70 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 18:22:27 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/17 21:23:54 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void *myMonFunc(void *vargp)
-{
-	t_philo *philo = (t_philo *)vargp;
+// void	*mymonfunc(void *vargp)
+// {
+// 	t_philo	*philo;
 
+// 	philo = (t_philo *)vargp;
+// 	philo->start_t = ft_gettime();
+// 	while (philo->time_to_die > 0)
+// 	{
+// 		pthread_mutex_lock(&philo->lock);
+// 		philo->time_to_die = philo->table->time_d \
+// 		+ (long long)(philo->start_t - ft_gettime());
+// 		pthread_mutex_unlock(&philo->lock);
+// 		usleep(10);
+// 	}
+// 	pthread_mutex_lock(&philo->table->lock);
+// 	if (philo->table->dead == 0)
+// 	{
+// 		philo->table->dead = 1;
+// 		printf("%.0f ms %d %s", ft_gettime() \
+// 		- philo->table->time_start, philo->id, DEAD_MSG);
+// 	}
+// 	pthread_mutex_unlock(&philo->table->lock);
+// 	return (NULL);
+// }
+
+void	*mymonfunc(void *vargp)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)vargp;
 	philo->start_t = ft_gettime();
-	while (philo->time_to_die > 0)
+	while (philo->table->dead == 0)
 	{
 		pthread_mutex_lock(&philo->lock);
-		philo->time_to_die = philo->table->time_d + (long long)(philo->start_t - ft_gettime());
+		philo->time_to_die = philo->table->time_d \
+		+ (long long)(philo->start_t - ft_gettime());
+		if (philo->time_to_die < 0 && philo->state != EAT)
+		{
+			pthread_mutex_lock(&philo->table->lock);
+			if (philo->table->dead == 0)
+			{
+				philo->table->dead = 1;
+				printf("%.0f ms %d %s", ft_gettime() \
+				- philo->table->time_start, philo->id, DEAD_MSG);
+			}
+			pthread_mutex_unlock(&philo->table->lock);
+		}
 		pthread_mutex_unlock(&philo->lock);
 		usleep(10);
 	}
-	pthread_mutex_lock(&philo->table->lock);
-	if (philo->table->dead == 0)
-	{
-		philo->table->dead = 1;
-		printf("%.0f ms %d %s", ft_gettime() - philo->table->time_start, philo->id, DEAD_MSG);
-	}
-	pthread_mutex_unlock(&philo->table->lock);
 	return (NULL);
 }
 
 void	*ft_onephilo(void *vargp)
 {
-	t_philo *philo = (t_philo *)vargp;
+	t_philo	*philo;
 
+	philo = (t_philo *)vargp;
 	philo->state = THINK;
 	ft_print_state(philo);
 	while (!philo->table->dead)
@@ -45,10 +77,12 @@ void	*ft_onephilo(void *vargp)
 	return (NULL);
 }
 
-void	*myPhiloFunc(void *vargp)
+void	*myphilofunc(void *vargp)
 {
-	t_philo *philo = (t_philo *)vargp;
-	if (pthread_create(&philo->mon_id, NULL, &myMonFunc, philo) != 0)
+	t_philo	*philo;
+
+	philo = (t_philo *)vargp;
+	if (pthread_create(&philo->mon_id, NULL, &mymonfunc, philo) != 0)
 		return (NULL);
 	if (philo->table->n_phil == 1)
 	{
@@ -84,22 +118,15 @@ int	ft_init_threads(t_table *table)
 {
 	int	count;
 
-	pthread_mutex_init(&table->lock, NULL);
 	count = -1;
-	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->n_phil);
-	table->dead = 0;
-	if (!table->philo)
-	{
-		free(table->philo);
-		table->philo = NULL;
-		return (1);
-	}
 	table->time_start = ft_gettime();
 	while (++count < table->n_phil)
 	{
 		ft_init_philo(table, count);
-		if (pthread_create(&(table->philo[count].thread_id), NULL, &myPhiloFunc, &(table->philo[count])) != 0)
+		if (pthread_create(&(table->philo[count].thread_id), \
+		NULL, &myphilofunc, &(table->philo[count])) != 0)
 			return (EXIT_FAILURE);
+		usleep(50);
 	}
 	count = -1;
 	while (++count < table->n_phil)
