@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/11 13:04:29 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/17 17:27:24 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ int	main(int argc, char **argv)
 	if (ft_init(argc, argv, &table))
 		return (EXIT_FAILURE);
 	gettimeofday(&time, NULL);
-	// printf("%ld ms", time.tv_usec);
-	// table_status(&table);
-	//pthread_mutex_destroy(&mutex);
-	//printf("Value: %d\n", );
-	// printf("Main Address philo: %p\n", table.philo);
 	ft_free(&table);
 	return (1);
 }

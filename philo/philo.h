@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/15 13:41:55 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/17 17:24:28 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ enum e_state
 {
 	EAT,
 	THINK,
-	SLEEP
+	SLEEP,
+	FORK,
 };
 
 enum e_error
@@ -58,6 +59,7 @@ typedef struct s_philo
 	pthread_t		mon_id;
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	lock;
 	double			time_to_die;
 	__uint64_t	start_t;
 }	t_philo;
@@ -70,6 +72,7 @@ typedef struct s_table
 	int		time_s;
 	int		n_eat;
 	int		dead;
+	double	time_start;
 	pthread_mutex_t	lock;
 	t_philo	*philo;
 }	t_table;
@@ -82,5 +85,6 @@ int	ft_init_threads(t_table *table);
 void	ft_free(t_table *table);
 void	ft_sleep(__uint64_t ms);
 __uint64_t	ft_gettime(void);
+void	ft_print_state(t_philo *philo);
 
 #endif
