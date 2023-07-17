@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 17:27:24 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/17 17:33:22 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (ft_init(argc, argv, &table))
 		return (EXIT_FAILURE);
-	gettimeofday(&time, NULL);
 	ft_free(&table);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 17:24:28 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/17 18:21:27 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ void	ft_free(t_table *table);
 void	ft_sleep(__uint64_t ms);
 __uint64_t	ft_gettime(void);
 void	ft_print_state(t_philo *philo);
+void	ft_action(void *vargp);
 
 #endif

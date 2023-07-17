@@ -6,7 +6,7 @@
 #    By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 14:48:12 by fkrug             #+#    #+#              #
-#    Updated: 2023/07/14 12:04:51 by fkrug            ###   ########.fr        #
+#    Updated: 2023/07/17 18:21:39 by fkrug            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ endif
 CFLAGS := 
 #-Wextra -Wall -Werror 
 HEADERS	:= -I ./include
-SRCS	:= main.c ft_utils.c ft_utils_2.c ft_init.c ft_threads.c
+SRCS	:= main.c ft_utils.c ft_utils_2.c ft_init.c ft_threads.c ft_states.c
 OBJS	:= ${SRCS:.c=.o}
 
 all: $(NAME)

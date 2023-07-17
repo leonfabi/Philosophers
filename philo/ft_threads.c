@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 17:25:55 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/17 18:22:27 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,13 @@ void	*myPhiloFunc(void *vargp)
 	if (pthread_create(&philo->mon_id, NULL, &myMonFunc, philo) != 0)
 		return (NULL);
 	if (philo->table->n_phil == 1)
-		return (ft_onephilo(philo));
-	while (!philo->table->dead)
 	{
-		philo->state = THINK;
-		ft_print_state(philo);
-		pthread_mutex_lock(&philo->l_fork);
-		pthread_mutex_lock(philo->r_fork);
-		philo->state = FORK;
-		ft_print_state(philo);
-		philo->state = EAT;
-		ft_print_state(philo);
-		ft_sleep(philo->table->time_e);
-		pthread_mutex_unlock(philo->r_fork);
-		pthread_mutex_unlock(&philo->l_fork);
-		pthread_mutex_lock(&philo->lock);
-		philo->start_t = ft_gettime();
-		pthread_mutex_unlock(&philo->lock);
-		ft_sleep(philo->table->time_s);
-		philo->state = SLEEP;
-		ft_print_state(philo);
+		if (pthread_join(philo->mon_id, NULL) != 0)
+			return (NULL);
+		return (ft_onephilo(philo));
 	}
+	while (!philo->table->dead)
+		ft_action(philo);
 	if (pthread_join(philo->mon_id, NULL) != 0)
 		return (NULL);
 	return (NULL);

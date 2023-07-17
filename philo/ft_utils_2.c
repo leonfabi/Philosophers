@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:03:29 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 17:29:32 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/17 17:40:33 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,13 @@ void	ft_print_state(t_philo *philo)
 	{
 		time = ft_gettime() - philo->table->time_start;
 		if (philo->state == EAT)
-			printf("%.0f ms %d %s", time, philo->id, EAT_MSG);
+			printf("%.0f %d %s", time, philo->id, EAT_MSG);
 		else if (philo->state == THINK)
-			printf("%.0f ms %d %s", time, philo->id, THINK_MSG);
+			printf("%.0f %d %s", time, philo->id, THINK_MSG);
 		else if (philo->state == SLEEP)
-			printf("%.0f ms %d %s", time, philo->id, SLEEP_MSG);
+			printf("%.0f %d %s", time, philo->id, SLEEP_MSG);
 		else if (philo->state == FORK)
-			printf("%.0f ms %d %s", time, philo->id, FORK_MSG);
+			printf("%.0f %d %s", time, philo->id, FORK_MSG);
 	}
 	pthread_mutex_unlock(&philo->table->lock);
-}
-
-void	ft_exit(t_table *table)
-{
-	
 }

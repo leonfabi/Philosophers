@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 14:57:38 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/17 18:12:49 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,3 @@ int	ft_init(int argc, char **argv, t_table *table)
 	}
 	return (ft_init_threads(table));
 }
-
