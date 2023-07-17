@@ -6,36 +6,50 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
+<<<<<<< HEAD:philo/test.c
 /*   Updated: 2023/07/08 09:46:16 by fkrug            ###   ########.fr       */
+=======
+/*   Updated: 2023/07/17 17:33:22 by fkrug            ###   ########.fr       */
+>>>>>>> develop:philo/main.c
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <pthread.h>
-#include <stdlib.h>
+#include "philo.h"
 
-int g = 10;
+pthread_mutex_t	mutex;
 
-void *myThreadFun(void *vargp)
+
+
+void	table_status(t_table *table)
 {
-	int *myid = (int *)vargp;
-	static int s = 0;
-
-	char command[256];
-	char str[12];
-
-	++s;
-	printf("Thread ID: %d, Static: %d, Global: %d\n", *myid, ++s, g);
+	printf("N_phil:\t%d\nTime_d:\t%d\nTime_e:\t%d\nTime_s:\t%d\n", table->n_phil, table->time_d, table->time_e, table->time_s);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	int			i;
+<<<<<<< HEAD:philo/test.c
 	pthread_t	tid[3];
 
 	i = -1;
 	while (++i < 3)
 		pthread_create(&tid[i], NULL, myThreadFun, (void *)&tid[i]);
 	pthread_exit(NULL);
+=======
+	int			*res = 0;
+	int			value = 0;
+	struct timeval	time;
+	t_table		table;
+
+
+	//pthread_mutex_init(&mutex, NULL);
+	if (argc != 5)
+		return (ft_error_mgmt(MISSING_ARG));
+	if (ft_input_check(argc, argv))
+		return (EXIT_FAILURE);
+	if (ft_init(argc, argv, &table))
+		return (EXIT_FAILURE);
+	ft_free(&table);
+>>>>>>> develop:philo/main.c
 	return (1);
 }
