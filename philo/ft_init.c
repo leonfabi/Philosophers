@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 19:03:02 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/25 09:36:36 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_init_table(t_table *table)
 		return (EXIT_FAILURE);
 	}
 	pthread_mutex_init(&table->lock, NULL);
+	pthread_mutex_init(&table->write, NULL);
 	table->dead = 0;
 	return (ft_init_threads(table));
 }

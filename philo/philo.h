@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 18:21:27 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/25 09:36:05 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_table
 	int		dead;
 	double	time_start;
 	pthread_mutex_t	lock;
+	pthread_mutex_t	write;
 	t_philo	*philo;
 }	t_table;
 
