@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:03:29 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/25 09:38:47 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/25 09:40:53 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_print_state(t_philo *philo)
 	pthread_mutex_lock(&philo->table->lock);
 	if (philo->table->dead == 0)
 	{
-		time = ft_gettime() - philo->table->time_start;
 		if (philo->state == EAT)
 			str = EAT_MSG;
 		else if (philo->state == THINK)
@@ -53,6 +52,7 @@ void	ft_print_state(t_philo *philo)
 	if (str != NULL)
 	{
 	pthread_mutex_lock(&philo->table->write);
+	time = ft_gettime() - philo->table->time_start;
 	printf("%.0f %d %s", time, philo->id, str);
 	pthread_mutex_unlock(&philo->table->write);
 	}
