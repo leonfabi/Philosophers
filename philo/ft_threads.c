@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 21:23:54 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 12:33:07 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 // 	return (NULL);
 // }
 
+void	*ft_monitor(void *vargp)
+{
+	
+}
 void	*mymonfunc(void *vargp)
 {
 	t_philo	*philo;
@@ -82,18 +86,18 @@ void	*myphilofunc(void *vargp)
 	t_philo	*philo;
 
 	philo = (t_philo *)vargp;
-	if (pthread_create(&philo->mon_id, NULL, &mymonfunc, philo) != 0)
-		return (NULL);
+	// if (pthread_create(&philo->mon_id, NULL, &mymonfunc, philo) != 0)
+	// 	return (NULL);
 	if (philo->table->n_phil == 1)
 	{
-		if (pthread_join(philo->mon_id, NULL) != 0)
-			return (NULL);
+		// if (pthread_join(philo->mon_id, NULL) != 0)
+		// 	return (NULL);
 		return (ft_onephilo(philo));
 	}
 	while (!philo->table->dead)
 		ft_action(philo);
-	if (pthread_join(philo->mon_id, NULL) != 0)
-		return (NULL);
+	// if (pthread_join(philo->mon_id, NULL) != 0)
+	// 	return (NULL);
 	return (NULL);
 }
 
@@ -126,8 +130,11 @@ int	ft_init_threads(t_table *table)
 		if (pthread_create(&(table->philo[count].thread_id), \
 		NULL, &myphilofunc, &(table->philo[count])) != 0)
 			return (EXIT_FAILURE);
-		usleep(50);
 	}
+	if (pthread_create(&table->monitor, NULL, &ft_monitor, &table) != 0)
+		return (EXIT_FAILURE);
+	if (pthread_join(table->monitor, NULL) != 0)
+		return (EXIT_FAILURE);
 	count = -1;
 	while (++count < table->n_phil)
 	{

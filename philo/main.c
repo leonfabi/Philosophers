@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 12:14:00 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 12:28:41 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	main(int argc, char **argv)
 	t_table		table;
 
 
-	//pthread_mutex_init(&mutex, NULL);
 	if (argc != 5)
 		return (ft_error_mgmt(MISSING_ARG));
 	if (ft_input_check(argc, argv))
@@ -51,7 +50,7 @@ int	main(int argc, char **argv)
 	if (ft_init_table(argc, argv, &table))
 		return (EXIT_FAILURE);
 	ft_init_threads(&table);
-	table_status(&table);
+	// table_status(&table);
 	ft_free(&table);
 	return (1);
 }
