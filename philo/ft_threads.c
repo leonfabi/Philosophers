@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 13:48:00 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 14:24:21 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*ft_monitor(void *vargp)
 			if (table->dead == 0)
 			{
 				table->dead = 1;
-				printf("%.0f ms %d %s", ft_gettime() \
+				printf("%.0f %d %s", ft_gettime() \
 				- table->time_start, table->philo[count].id, DEAD_MSG);
 			}
 			pthread_mutex_unlock(&table->lock);

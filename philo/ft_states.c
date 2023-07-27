@@ -6,11 +6,31 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:15:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 12:25:47 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 14:40:30 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_take_fork(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(&philo->l_fork);
+		philo->state = FORK;
+		ft_print_state(philo);
+		pthread_mutex_lock(philo->r_fork);
+		ft_print_state(philo);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->r_fork);
+		philo->state = FORK;
+		ft_print_state(philo);
+		pthread_mutex_lock(&philo->l_fork);
+		ft_print_state(philo);
+	}
+}
 
 void	ft_action(void *vargp)
 {
@@ -19,12 +39,7 @@ void	ft_action(void *vargp)
 	philo = (t_philo *)vargp;
 	philo->state = THINK;
 	ft_print_state(philo);
-	pthread_mutex_lock(&philo->l_fork);
-	// printf("%d ---------------- locked fork: %p\n", philo->id, &philo->l_fork);
-	pthread_mutex_lock(philo->r_fork);
-	// printf("%d ---------------- locked fork: %p\n", philo->id, philo->r_fork);
-	philo->state = FORK;
-	ft_print_state(philo);
+	ft_take_fork(philo);
 	philo->state = EAT;
 	ft_print_state(philo);
 	pthread_mutex_lock(&philo->lock);
@@ -32,9 +47,7 @@ void	ft_action(void *vargp)
 	pthread_mutex_unlock(&philo->lock);
 	ft_sleep(philo->table->time_e);
 	pthread_mutex_unlock(&philo->l_fork);
-	// printf("%d ---------------- released fork: %p\n", philo->id, &philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
-	// printf("%d ---------------- released fork: %p\n", philo->id, philo->r_fork);
 	philo->state = SLEEP;
 	ft_print_state(philo);
 	ft_sleep(philo->table->time_s);

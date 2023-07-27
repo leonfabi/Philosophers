@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 12:28:41 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 14:13:46 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	t_table		table;
 
 
-	if (argc != 5)
+	if (argc != 5 && argc != 6)
 		return (ft_error_mgmt(MISSING_ARG));
 	if (ft_input_check(argc, argv))
 		return (EXIT_FAILURE);
