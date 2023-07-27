@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 13:02:05 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 15:49:18 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_philo
 	struct s_table	*table;
 	int				state;
 	int				id;
+	int				times_ate;
 	pthread_t		thread_id;
 	pthread_t		mon_id;
 	pthread_mutex_t	l_fork;

@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 13:02:23 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 15:54:39 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_init_philo(t_table *table, int count)
 	table->philo[count].state = THINK;
 	table->philo[count].time_to_die = table->time_d;
 	table->philo[count].table = table;
+	table->philo[count].times_ate = 0;
 	pthread_mutex_init(&table->philo[count].l_fork, NULL);
 	pthread_mutex_init(&table->philo[count].lock, NULL);
 	if (count < table->n_phil - 1)

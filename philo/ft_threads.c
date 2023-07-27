@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 14:24:21 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 15:40:14 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	*ft_monitor(void *vargp)
 
 	count = 0;
 	table = (t_table *)vargp;
-	ft_sleep(2000);
+	ft_sleep(1000);
 	table->start = 1;
 	table->time_start = ft_gettime();
+	ft_sleep(30);
 	while (!table->dead)
 	{
 		pthread_mutex_lock(&table->philo[count].lock);
@@ -29,6 +30,7 @@ void	*ft_monitor(void *vargp)
 		+ (long long)(table->philo[count].start_t - ft_gettime());
 		if (table->philo[count].time_to_die < 0)
 		{
+			printf("table->philo[%d].time_to_die: %f, table->philo[%d].start_t - ft_gettime(): %lld\n", count, table->philo[count].time_to_die, count, (long long)(table->philo[count].start_t - ft_gettime()));
 			pthread_mutex_lock(&table->lock);
 			if (table->dead == 0)
 			{
@@ -82,8 +84,12 @@ void	*ft_onephilo(void *vargp)
 	philo = (t_philo *)vargp;
 	philo->state = THINK;
 	ft_print_state(philo);
+	pthread_mutex_lock(&philo->l_fork);
+	philo->state = FORK;
+	ft_print_state(philo);
 	while (!philo->table->dead)
 		usleep(10);
+	pthread_mutex_unlock(&philo->l_fork);
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:15:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 14:40:30 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 15:53:03 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_action(void *vargp)
 	ft_print_state(philo);
 	ft_take_fork(philo);
 	philo->state = EAT;
+	philo->times_ate += 1;
 	ft_print_state(philo);
 	pthread_mutex_lock(&philo->lock);
 	philo->start_t = ft_gettime();
