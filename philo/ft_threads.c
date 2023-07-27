@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/17 21:23:54 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 12:34:39 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,11 @@ int	ft_init_threads(t_table *table)
 	count = -1;
 	table->time_start = ft_gettime();
 	while (++count < table->n_phil)
-	{
 		ft_init_philo(table, count);
+	count = -1;
+	while (++count < table->n_phil)
+	{
+		// ft_init_philo(table, count);
 		if (pthread_create(&(table->philo[count].thread_id), \
 		NULL, &myphilofunc, &(table->philo[count])) != 0)
 			return (EXIT_FAILURE);

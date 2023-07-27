@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 11:57:11 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 12:35:31 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 	if (ft_init(argc, argv, &table))
 		return (EXIT_FAILURE);
 	ft_init_threads(&table);
-	table_status(&table);
+	// table_status(&table);
 	ft_free(&table);
 	return (1);
 }
