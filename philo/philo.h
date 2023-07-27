@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 16:30:42 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 16:32:20 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_philo
 	int				id;
 	int				times_ate;
 	int				max_eat;
+	int				died;
 	pthread_t		thread_id;
 	pthread_t		mon_id;
 	pthread_mutex_t	l_fork;

@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 16:26:07 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 16:33:02 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_init_philo(t_table *table, int count)
 	table->philo[count].state = THINK;
 	table->philo[count].time_to_die = table->time_d;
 	table->philo[count].table = table;
+	table->philo[count].died = 0;
 	table->philo[count].max_eat = table->n_eat;
 	if (table->philo[count].max_eat == -1)
 		table->philo[count].times_ate = -2;
@@ -47,7 +48,7 @@ int	ft_init_table(int argc, char **argv, t_table *table)
 	}
 	pthread_mutex_init(&table->lock, NULL);
 	pthread_mutex_init(&table->write, NULL);
-	pthread_mutex_init(&table->full, NULL)
+	pthread_mutex_init(&table->full, NULL);
 	table->dead = 0;
 	table->n_eat = -1;
 	table->start = 0;
