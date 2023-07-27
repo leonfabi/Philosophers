@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 08:56:09 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/10 13:55:21 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 12:48:57 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ long long	ft_atoi(const char *nptr)
 	return (n);
 }
 
-int	ft_input_check(int argc, char **argv)
+int	ft_input_test(int argc, char **argv)
 {
 	int		c_0;
 	int		c_1;

@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 12:29:36 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 13:02:05 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_table
 	int		time_s;
 	int		n_eat;
 	int		dead;
+	int		start;
 	double	time_start;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	write;
@@ -81,6 +82,7 @@ typedef struct s_table
 
 int			ft_error_mgmt(int errno);
 int			ft_input_check(int argc, char **argv);
+void	ft_init_philo(t_table *table, int count);
 long long	ft_atoi(const char *nptr);
 int	ft_init(int argc, char **argv, t_table *table);
 int	ft_init_table(int argc, char **argv, t_table *table);
