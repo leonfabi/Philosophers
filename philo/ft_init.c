@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 11:14:46 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 12:12:08 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	ft_init(int argc, char **argv, t_table *table)
 			table->time_e = (int)number;
 		else if (count == 4)
 			table->time_s = (int)number;
+		else if (count == 5)
+			table->n_eat = (int)number;
 	}
 	return (ft_init_table(table));
 }
