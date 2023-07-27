@@ -6,13 +6,13 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 12:12:08 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 12:15:13 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_init_table(t_table *table)
+int	ft_init_table(int argc, char **argv, t_table *table)
 {
 	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->n_phil);
 	if (!table->philo)
@@ -24,7 +24,8 @@ int	ft_init_table(t_table *table)
 	pthread_mutex_init(&table->lock, NULL);
 	pthread_mutex_init(&table->write, NULL);
 	table->dead = 0;
-	return (EXIT_SUCCESS);
+	table->n_eat = -1;
+	return (ft_init(argc, argv, table));
 	// return (ft_init_threads(table));
 }
 
@@ -55,5 +56,5 @@ int	ft_init(int argc, char **argv, t_table *table)
 		else if (count == 5)
 			table->n_eat = (int)number;
 	}
-	return (ft_init_table(table));
+	return (EXIT_SUCCESS);
 }

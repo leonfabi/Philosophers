@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 11:57:11 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 12:14:00 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 		return (ft_error_mgmt(MISSING_ARG));
 	if (ft_input_check(argc, argv))
 		return (EXIT_FAILURE);
-	if (ft_init(argc, argv, &table))
+	if (ft_init_table(argc, argv, &table))
 		return (EXIT_FAILURE);
 	ft_init_threads(&table);
 	table_status(&table);

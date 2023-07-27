@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 11:13:12 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 12:15:55 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int			ft_error_mgmt(int errno);
 int			ft_input_check(int argc, char **argv);
 long long	ft_atoi(const char *nptr);
 int	ft_init(int argc, char **argv, t_table *table);
+int	ft_init_table(int argc, char **argv, t_table *table);
 int	ft_init_threads(t_table *table);
 void	ft_free(t_table *table);
 void	ft_sleep(__uint64_t ms);
