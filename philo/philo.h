@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 15:49:18 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/27 16:30:42 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_philo
 	int				state;
 	int				id;
 	int				times_ate;
+	int				max_eat;
 	pthread_t		thread_id;
 	pthread_t		mon_id;
 	pthread_mutex_t	l_fork;
@@ -72,9 +73,11 @@ typedef struct s_table
 	int		time_e;
 	int		time_s;
 	int		n_eat;
+	int		n_full;
 	int		dead;
 	int		start;
 	double	time_start;
+	pthread_mutex_t	full;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	write;
 	pthread_t		monitor;
