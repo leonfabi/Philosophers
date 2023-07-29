@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 08:56:09 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 12:48:57 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 14:31:22 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,13 @@ int	ft_input_test(int argc, char **argv)
 
 void	ft_free(t_table *table)
 {
+	int count;
+
+	count = -1;
+	while (++count < table->n_phil)
+		pthread_mutex_destroy(&table->philo[count].l_fork);
+	pthread_mutex_destroy(&table->full);
+	pthread_mutex_destroy(&table->lock);
+	pthread_mutex_destroy(&table->write);
 	free(table->philo);
 }
