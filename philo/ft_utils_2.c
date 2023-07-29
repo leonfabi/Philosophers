@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:03:29 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 13:46:48 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 14:13:09 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,16 @@ void	ft_print_state(t_philo *philo)
 	if (str != NULL)
 		printf("%.0f %d %s", time, philo->id, str);
 	pthread_mutex_unlock(&philo->table->write);
+}
+
+void	ft_philo_dead(t_table *table, int count)
+{
+	int	i;
+
+	i = -1;
+	while (++i < table->n_phil)
+	{
+		if (i != count)
+			table->philo[i].died = 1;
+	}
 }
