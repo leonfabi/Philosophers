@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 16:33:02 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 11:16:05 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	ft_init_table(int argc, char **argv, t_table *table)
 	int	count;
 
 	count = -1;
+	if (ft_init(argc, argv, table))
+		return (EXIT_FAILURE);
 	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->n_phil);
 	if (!table->philo)
 	{
@@ -52,8 +54,6 @@ int	ft_init_table(int argc, char **argv, t_table *table)
 	table->dead = 0;
 	table->n_eat = -1;
 	table->start = 0;
-	if (ft_init(argc, argv, table))
-		return (EXIT_FAILURE);
 	while (++count < table->n_phil)
 		ft_init_philo(table, count);
 	return (EXIT_SUCCESS);
