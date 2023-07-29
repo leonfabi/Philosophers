@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 14:27:27 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 14:37:28 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void	*ft_monitor(void *vargp)
 
 void	*ft_onephilo(t_philo	*philo)
 {
+	int died;
+
+	died = 0;
 	philo->state = THINK;
 	ft_print_state(philo);
 	pthread_mutex_lock(&philo->l_fork);
@@ -71,6 +74,16 @@ void	*ft_onephilo(t_philo	*philo)
 	ft_print_state(philo);
 	// while (!philo->table->dead)
 	// 	usleep(10);
+	while (!died)
+	{
+		
+		pthread_mutex_lock(&philo->lock);
+		pthread_mutex_lock(&philo->table->lock);
+		died = philo->table->dead;
+		pthread_mutex_unlock(&philo->table->lock);
+		pthread_mutex_unlock(&philo->lock);
+		usleep(100);
+	}
 	pthread_mutex_unlock(&philo->l_fork);
 	return (NULL);
 }
@@ -93,15 +106,9 @@ void	*myphilofunc(void *vargp)
 	philo->start_t = ft_gettime();
 	pthread_mutex_unlock(&philo->lock);
 	if (philo->table->n_phil == 1)
-	{
-		while (!philo->died)
-			ft_onephilo(philo);
-	}
-	else
-	{
-		while (!philo->died)
-			ft_action(philo);
-	}
+		return (ft_onephilo(philo));
+	while (!philo->died)
+		ft_action(philo);
 	return (NULL);
 }
 
