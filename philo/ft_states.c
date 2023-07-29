@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:15:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 13:34:04 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 14:05:40 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	ft_eat(t_philo *philo)
 	philo->state = EAT;
 	if (philo->max_eat != -1)
 		philo->times_ate += 1;
-	// printf("Philo %d ate %d times\n", philo->id, philo->times_ate);
 	pthread_mutex_lock(&philo->lock);
 	philo->start_t = ft_gettime();
 	pthread_mutex_unlock(&philo->lock);
@@ -86,7 +85,6 @@ void	ft_action(t_philo *philo)
 	}
 	if (philo->times_ate > philo->max_eat)
 		ft_full(philo);
-	// printf("%d Has eaten %d times from %d max\n", philo->id, philo->times_ate, philo->max_eat);
 	philo->state = SLEEP;
 	ft_print_state(philo);
 	ft_sleep(philo->table->time_s);

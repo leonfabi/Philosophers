@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 13:19:42 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 14:05:18 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	ft_init_table(int argc, char **argv, t_table *table)
 		ft_init_philo(table, count);
 	return (EXIT_SUCCESS);
 }
+
 int	ft_input_check(int argc, char **argv)
 {
 	int			count;
