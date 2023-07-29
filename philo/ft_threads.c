@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 11:12:40 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 11:39:44 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ void	*ft_monitor(void *vargp)
 
 	count = 0;
 	table = (t_table *)vargp;
-	ft_sleep(1000);
+	ft_sleep(2000);
+	pthread_mutex_lock(&table->lock);
 	table->start = 1;
 	table->time_start = ft_gettime();
+	pthread_mutex_unlock(&table->lock);
 	ft_sleep(30);
 	while (!table->dead)
 	{
@@ -82,10 +84,17 @@ void	*ft_onephilo(void *vargp)
 void	*myphilofunc(void *vargp)
 {
 	t_philo	*philo;
+	int		start;
 
+	start = 0;
 	philo = (t_philo *)vargp;
-	while (philo->table->start != 1)
+	while (start != 1)
+	{
+		pthread_mutex_lock(&philo->table->lock);
+		start = philo->table->start;
+		pthread_mutex_unlock(&philo->table->lock);
 		usleep(10);
+	}
 	philo->start_t = ft_gettime();
 	if (philo->table->n_phil == 1)
 		return (ft_onephilo(philo));
