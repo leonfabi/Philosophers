@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 14:56:30 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 14:13:46 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 13:18:13 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ void	table_status(t_table *table)
 
 int	main(int argc, char **argv)
 {
-	int			i;
-	int			*res = 0;
-	int			value = 0;
-	struct timeval	time;
 	t_table		table;
 
 

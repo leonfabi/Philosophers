@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:03:29 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/25 09:40:53 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 13:16:44 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	ft_print_state(t_philo *philo)
 	if (philo->table->dead == 0)
 	{
 		if (philo->state == EAT)
-			str = EAT_MSG;
+			str = "is eating\n";
 		else if (philo->state == THINK)
-			str = THINK_MSG;
+			str = "is thinking\n";
 		else if (philo->state == SLEEP)
-			str = SLEEP_MSG;
+			str = "is sleeping\n";
 		else if (philo->state == FORK)
-			str = FORK_MSG;
+			str = "has taken a fork\n";
 	}
 	pthread_mutex_unlock(&philo->table->lock);
 	if (str != NULL)

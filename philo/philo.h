@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 12:22:45 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 13:19:45 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,8 @@
 # define LIMIT_MSG "Error: Exceeding limits of int\n"
 # define NEG_NUMBER_MSG "Error: Negative numbers not allowed\n"
 # define PHIL_RANGE_MSG "Error: Philosophers out of range\n"
-# define FORK_MSG "has taken a fork\n"
-# define EAT_MSG "is eating\n"
-# define SLEEP_MSG "is sleeping\n"
-# define THINK_MSG "is thinking\n"
 # define DEAD_MSG "died\n"
-# define MAX_INT 2147483647
-# define MIN_INT -2147483648
+
 
 enum e_state
 {
