@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 11:59:22 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 13:00:48 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	ft_init_table(int argc, char **argv, t_table *table)
 	pthread_mutex_init(&table->write, NULL);
 	pthread_mutex_init(&table->full, NULL);
 	table->dead = 0;
-	table->n_eat = -1;
 	table->start = 0;
+	table->n_full = 0;
 	while (++count < table->n_phil)
 		ft_init_philo(table, count);
 	return (EXIT_SUCCESS);
@@ -86,6 +86,7 @@ int	ft_init(int argc, char **argv, t_table *table)
 	number = 0;
 	if (ft_input_check(argc, argv))
 		return (EXIT_FAILURE);
+	table->n_eat = -1;
 	while (++count < argc)
 	{
 		number = ft_atoi(argv[count]);
