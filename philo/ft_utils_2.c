@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:03:29 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 13:16:44 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 13:46:48 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,14 @@ void	ft_print_state(t_philo *philo)
 {
 	double	time;
 	char	*str;
+	int		dead;
 
 	str = NULL;
 	pthread_mutex_lock(&philo->table->lock);
-	if (philo->table->dead == 0)
+	dead = philo->table->dead;
+	pthread_mutex_unlock(&philo->table->lock);
+	pthread_mutex_lock(&philo->table->write);
+	if (dead == 0)
 	{
 		if (philo->state == EAT)
 			str = "is eating\n";
@@ -48,12 +52,8 @@ void	ft_print_state(t_philo *philo)
 		else if (philo->state == FORK)
 			str = "has taken a fork\n";
 	}
-	pthread_mutex_unlock(&philo->table->lock);
-	if (str != NULL)
-	{
-	pthread_mutex_lock(&philo->table->write);
 	time = ft_gettime() - philo->table->time_start;
-	printf("%.0f %d %s", time, philo->id, str);
+	if (str != NULL)
+		printf("%.0f %d %s", time, philo->id, str);
 	pthread_mutex_unlock(&philo->table->write);
-	}
 }

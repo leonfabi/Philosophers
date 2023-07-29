@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:15:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 12:56:31 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 13:34:04 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	ft_action(t_philo *philo)
 		ft_take_fork(philo);
 		ft_eat(philo);
 		ft_release_fork(philo);
-		// pthread_mutex_unlock(&philo->l_fork);
-		// pthread_mutex_unlock(philo->r_fork);
 	}
 	if (philo->times_ate == philo->max_eat)
 	{
