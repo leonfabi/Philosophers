@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 11:39:44 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 11:57:17 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void	*ft_monitor(void *vargp)
 				table->dead = 1;
 				table->philo[count].died = 1;
 				ft_philo_dead(table, count);
+				pthread_mutex_lock(&table->write);
 				printf("%.0f %d %s", ft_gettime() \
 				- table->time_start, table->philo[count].id, DEAD_MSG);
+				pthread_mutex_unlock(&table->write);
 			}
 			pthread_mutex_unlock(&table->lock);
 		}
@@ -95,7 +97,9 @@ void	*myphilofunc(void *vargp)
 		pthread_mutex_unlock(&philo->table->lock);
 		usleep(10);
 	}
+	pthread_mutex_lock(&philo->lock);
 	philo->start_t = ft_gettime();
+	pthread_mutex_unlock(&philo->lock);
 	if (philo->table->n_phil == 1)
 		return (ft_onephilo(philo));
 	// while (!philo->table->dead)

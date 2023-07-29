@@ -1,0 +1,67 @@
+==67354== Helgrind, a thread error detector
+==67354== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==67354== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==67354== Command: ./philo 4 410 200 200
+==67354== Parent PID: 17025
+==67354== 
+==67354== ---Thread-Announcement------------------------------------------
+==67354== 
+==67354== Thread #6 was created
+==67354==    at 0x49B4122: clone (clone.S:71)
+==67354==    by 0x48792EB: create_thread (createthread.c:101)
+==67354==    by 0x487AE0F: pthread_create@@GLIBC_2.2.5 (pthread_create.c:817)
+==67354==    by 0x4842917: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==67354==    by 0x10A582: ft_init_threads (ft_threads.c:120)
+==67354==    by 0x109591: main (main.c:52)
+==67354== 
+==67354== ---Thread-Announcement------------------------------------------
+==67354== 
+==67354== Thread #2 was created
+==67354==    at 0x49B4122: clone (clone.S:71)
+==67354==    by 0x48792EB: create_thread (createthread.c:101)
+==67354==    by 0x487AE0F: pthread_create@@GLIBC_2.2.5 (pthread_create.c:817)
+==67354==    by 0x4842917: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==67354==    by 0x10A53E: ft_init_threads (ft_threads.c:116)
+==67354==    by 0x109591: main (main.c:52)
+==67354== 
+==67354== ---Thread-Announcement------------------------------------------
+==67354== 
+==67354== Thread #1 is the program's root thread
+==67354== 
+==67354== ----------------------------------------------------------------
+==67354== 
+==67354==  Lock at 0x4A8A0A0 was first observed
+==67354==    at 0x4843D9D: pthread_mutex_init (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==67354==    by 0x109C6B: ft_init_philo (ft_init.c:28)
+==67354==    by 0x109EA1: ft_init_table (ft_init.c:58)
+==67354==    by 0x109577: main (main.c:50)
+==67354==  Address 0x4a8a0a0 is 96 bytes inside a block of size 608 alloc'd
+==67354==    at 0x483C893: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==67354==    by 0x109DE4: ft_init_table (ft_init.c:44)
+==67354==    by 0x109577: main (main.c:50)
+==67354==  Block was alloc'd by thread #1
+==67354== 
+==67354== Possible data race during read of size 8 at 0x4A8A0D0 by thread #6
+==67354== Locks held: 1, at address 0x4A8A0A0
+==67354==    at 0x10A182: ft_monitor (ft_threads.c:44)
+==67354==    by 0x4842B1A: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==67354==    by 0x487A608: start_thread (pthread_create.c:477)
+==67354==    by 0x49B4132: clone (clone.S:95)
+==67354== 
+==67354== This conflicts with a previous write of size 8 by thread #2
+==67354== Locks held: none
+==67354==    at 0x10A47D: myphilofunc (ft_threads.c:100)
+==67354==    by 0x4842B1A: ??? (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==67354==    by 0x487A608: start_thread (pthread_create.c:477)
+==67354==    by 0x49B4132: clone (clone.S:95)
+==67354==  Address 0x4a8a0d0 is 144 bytes inside a block of size 608 alloc'd
+==67354==    at 0x483C893: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_helgrind-amd64-linux.so)
+==67354==    by 0x109DE4: ft_init_table (ft_init.c:44)
+==67354==    by 0x109577: main (main.c:50)
+==67354==  Block was alloc'd by thread #1
+==67354== 
+==67354== 
+==67354== Use --history-level=approx or =none to gain increased speed, at
+==67354== the cost of reduced accuracy of conflicting-access information
+==67354== For lists of detected and suppressed errors, rerun with: -s
+==67354== ERROR SUMMARY: 16497 errors from 1 contexts (suppressed: 397317 from 107)

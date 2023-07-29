@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 11:16:05 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 11:59:22 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_init_philo(t_table *table, int count)
 	table->philo[count].table = table;
 	table->philo[count].died = 0;
 	table->philo[count].max_eat = table->n_eat;
+	table->philo[count].start_t = 0;
 	if (table->philo[count].max_eat == -1)
 		table->philo[count].times_ate = -2;
 	else
