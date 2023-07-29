@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 13:02:23 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 14:05:18 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ void	ft_init_philo(t_table *table, int count)
 	table->philo[count].state = THINK;
 	table->philo[count].time_to_die = table->time_d;
 	table->philo[count].table = table;
+	table->philo[count].died = 0;
+	table->philo[count].max_eat = table->n_eat;
+	table->philo[count].start_t = 0;
+	if (table->philo[count].max_eat == -1)
+		table->philo[count].times_ate = -2;
+	else
+		table->philo[count].times_ate = 0;
 	pthread_mutex_init(&table->philo[count].l_fork, NULL);
 	pthread_mutex_init(&table->philo[count].lock, NULL);
 	if (count < table->n_phil - 1)
@@ -33,6 +40,8 @@ int	ft_init_table(int argc, char **argv, t_table *table)
 	int	count;
 
 	count = -1;
+	if (ft_init(argc, argv, table))
+		return (EXIT_FAILURE);
 	table->philo = (t_philo *)malloc(sizeof(t_philo) * table->n_phil);
 	if (!table->philo)
 	{
@@ -42,15 +51,15 @@ int	ft_init_table(int argc, char **argv, t_table *table)
 	}
 	pthread_mutex_init(&table->lock, NULL);
 	pthread_mutex_init(&table->write, NULL);
+	pthread_mutex_init(&table->full, NULL);
 	table->dead = 0;
-	table->n_eat = -1;
 	table->start = 0;
-	if (ft_init(argc, argv, table))
-		return (EXIT_FAILURE);
+	table->n_full = 0;
 	while (++count < table->n_phil)
 		ft_init_philo(table, count);
 	return (EXIT_SUCCESS);
 }
+
 int	ft_input_check(int argc, char **argv)
 {
 	int			count;
@@ -61,7 +70,7 @@ int	ft_input_check(int argc, char **argv)
 	while (++count < argc)
 	{
 		number = ft_atoi(argv[count]);
-		if (number > MAX_INT)
+		if (number > 2147483647)
 			return (ft_error_mgmt(LIMIT));
 		else if (number < 0)
 			return (ft_error_mgmt(NEG_NUMBER));
@@ -78,6 +87,7 @@ int	ft_init(int argc, char **argv, t_table *table)
 	number = 0;
 	if (ft_input_check(argc, argv))
 		return (EXIT_FAILURE);
+	table->n_eat = -1;
 	while (++count < argc)
 	{
 		number = ft_atoi(argv[count]);

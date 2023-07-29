@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:15:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/27 14:40:30 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 14:05:40 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,59 @@ void	ft_take_fork(t_philo *philo)
 	}
 }
 
-void	ft_action(void *vargp)
+void	ft_release_fork(t_philo *philo)
 {
-	t_philo *philo;
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_unlock(&philo->l_fork);
+		pthread_mutex_unlock(philo->r_fork);
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(&philo->l_fork);
+	}
+}
 
-	philo = (t_philo *)vargp;
-	philo->state = THINK;
-	ft_print_state(philo);
-	ft_take_fork(philo);
+void	ft_eat(t_philo *philo)
+{
 	philo->state = EAT;
-	ft_print_state(philo);
+	if (philo->max_eat != -1)
+		philo->times_ate += 1;
 	pthread_mutex_lock(&philo->lock);
 	philo->start_t = ft_gettime();
 	pthread_mutex_unlock(&philo->lock);
+	ft_print_state(philo);
 	ft_sleep(philo->table->time_e);
-	pthread_mutex_unlock(&philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
+}
+
+void	ft_full(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->lock);
+	philo->start_t = ft_gettime();
+	pthread_mutex_unlock(&philo->lock);
+}
+
+void	ft_action(t_philo *philo)
+{
+	philo->state = THINK;
+	ft_print_state(philo);
+	if (philo->times_ate < philo->max_eat)
+	{
+		ft_take_fork(philo);
+		ft_eat(philo);
+		ft_release_fork(philo);
+	}
+	if (philo->times_ate == philo->max_eat)
+	{
+		pthread_mutex_lock(&philo->table->full);
+		philo->table->n_full += 1;
+		pthread_mutex_unlock(&philo->table->full);
+		philo->times_ate += 1;
+		ft_full(philo);
+	}
+	if (philo->times_ate > philo->max_eat)
+		ft_full(philo);
 	philo->state = SLEEP;
 	ft_print_state(philo);
 	ft_sleep(philo->table->time_s);
