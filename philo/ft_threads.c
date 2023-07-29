@@ -6,11 +6,23 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 14:37:28 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 14:48:01 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_full_behave(t_table *table, int count)
+{
+	pthread_mutex_lock(&table->lock);
+	if (table->n_full == table->n_phil)
+	{
+		table->dead = 1;
+		table->philo[count].died = 1;
+		ft_philo_dead(table, count);
+	}
+	pthread_mutex_unlock(&table->lock);
+}
 
 void	*ft_monitor(void *vargp)
 {
@@ -27,33 +39,7 @@ void	*ft_monitor(void *vargp)
 	ft_sleep(30);
 	while (!table->dead)
 	{
-		pthread_mutex_lock(&table->philo[count].lock);
-		table->philo[count].time_to_die = table->time_d \
-		+ (long long)(table->philo[count].start_t - ft_gettime());
-		if (table->philo[count].time_to_die < 0)
-		{
-			pthread_mutex_lock(&table->lock);
-			if (table->dead == 0)
-			{
-				table->dead = 1;
-				table->philo[count].died = 1;
-				ft_philo_dead(table, count);
-				pthread_mutex_lock(&table->write);
-				printf("%.0f %d %s", ft_gettime() \
-				- table->time_start, table->philo[count].id, "died\n");
-				pthread_mutex_unlock(&table->write);
-			}
-			pthread_mutex_unlock(&table->lock);
-		}
-		pthread_mutex_lock(&table->lock);
-		if (table->n_full == table->n_phil)
-		{
-			table->dead = 1;
-			table->philo[count].died = 1;
-			ft_philo_dead(table, count);
-		}
-		pthread_mutex_unlock(&table->lock);
-		pthread_mutex_unlock(&table->philo[count].lock);
+		ft_check_death(table, count);
 		if (count == table->n_phil - 1)
 			count = 0;
 		else
@@ -64,7 +50,7 @@ void	*ft_monitor(void *vargp)
 
 void	*ft_onephilo(t_philo	*philo)
 {
-	int died;
+	int	died;
 
 	died = 0;
 	philo->state = THINK;
@@ -72,11 +58,8 @@ void	*ft_onephilo(t_philo	*philo)
 	pthread_mutex_lock(&philo->l_fork);
 	philo->state = FORK;
 	ft_print_state(philo);
-	// while (!philo->table->dead)
-	// 	usleep(10);
 	while (!died)
 	{
-		
 		pthread_mutex_lock(&philo->lock);
 		pthread_mutex_lock(&philo->table->lock);
 		died = philo->table->dead;

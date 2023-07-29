@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 08:56:09 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 14:31:22 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 14:48:40 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_input_test(int argc, char **argv)
 
 void	ft_free(t_table *table)
 {
-	int count;
+	int	count;
 
 	count = -1;
 	while (++count < table->n_phil)
