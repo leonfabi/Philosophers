@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 14:05:18 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 15:13:24 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ int	ft_input_check(int argc, char **argv)
 		number = ft_atoi(argv[count]);
 		if (number > 2147483647)
 			return (ft_error_mgmt(LIMIT));
-		else if (number < 0)
+		if (number < 0)
 			return (ft_error_mgmt(NEG_NUMBER));
+		if (number == 0)
+			return (ft_error_mgmt(LIMIT));
 	}
 	return (EXIT_SUCCESS);
 }

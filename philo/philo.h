@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 14:47:05 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/29 15:14:01 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # define MISSING_ARG_MSG "Error: Missing arguments\n"
 # define NO_NUMBER_MSG "Error: Not a number\n"
-# define LIMIT_MSG "Error: Exceeding limits of int\n"
+# define LIMIT_MSG "Error: Numbers out of range\n"
 # define NEG_NUMBER_MSG "Error: Negative numbers not allowed\n"
 # define PHIL_RANGE_MSG "Error: Philosophers out of range\n"
 
