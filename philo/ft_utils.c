@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 08:56:09 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/31 14:49:57 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/31 15:49:06 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	ft_error_mgmt(int errno)
 		str = "Error: Negative numbers not allowed\n";
 	else if (errno == PHIL_RANGE)
 		str = "Error: Philosophers out of range\n";
+	else if (errno == MIN_TIME)
+		str = "Error: Please choose time at least equal to 60ms\n";
 	printf("%s", str);
 	return (1);
 }

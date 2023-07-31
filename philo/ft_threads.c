@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 15:06:56 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/31 15:51:48 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	*ft_monitor(void *vargp)
 	table->start = 1;
 	table->time_start = ft_gettime();
 	pthread_mutex_unlock(&table->lock);
-	usleep(100);
+	ft_sleep(55);
+	usleep(999999);
 	while (!table->dead)
 	{
 		ft_check_death(table, count);

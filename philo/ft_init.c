@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 09:40:01 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 15:13:24 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/31 15:53:59 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	ft_input_check(int argc, char **argv)
 
 	count = 0;
 	number = 0;
+	if (ft_input_test(argc, argv))
+		return (EXIT_FAILURE);
 	while (++count < argc)
 	{
 		number = ft_atoi(argv[count]);
@@ -74,8 +76,10 @@ int	ft_input_check(int argc, char **argv)
 			return (ft_error_mgmt(LIMIT));
 		if (number < 0)
 			return (ft_error_mgmt(NEG_NUMBER));
-		if (number == 0)
-			return (ft_error_mgmt(LIMIT));
+		if (count == 1 && (number > 200 || number == 0))
+			return (ft_error_mgmt(PHIL_RANGE));
+		if ((count > 1 && count < 5) && number < 60)
+			return (ft_error_mgmt(MIN_TIME));
 	}
 	return (EXIT_SUCCESS);
 }
