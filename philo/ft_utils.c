@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 08:56:09 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/29 15:13:05 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/07/31 14:49:57 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 int	ft_error_mgmt(int errno)
 {
+	char	*str;
+
 	if (errno == MISSING_ARG)
-		printf(MISSING_ARG_MSG);
-	if (errno == NO_NUMBER)
-		printf(NO_NUMBER_MSG);
-	if (errno == LIMIT)
-		printf(LIMIT_MSG);
-	if (errno == NEG_NUMBER)
-		printf(NEG_NUMBER_MSG);
-	if (errno == PHIL_RANGE)
-		printf(PHIL_RANGE_MSG);
+		str = "Error: Missing arguments\n";
+	else if (errno == NO_NUMBER)
+		str = "Error: Not a number\n";
+	else if (errno == LIMIT)
+		str = "Error: Numbers out of range\n";
+	else if (errno == NEG_NUMBER)
+		str = "Error: Negative numbers not allowed\n";
+	else if (errno == PHIL_RANGE)
+		str = "Error: Philosophers out of range\n";
+	printf("%s", str);
 	return (1);
 }
 
