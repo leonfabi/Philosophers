@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 08:56:09 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/31 15:49:06 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/08/01 14:12:57 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_error_mgmt(int errno)
 {
 	char	*str;
 
+	str = NULL;
 	if (errno == MISSING_ARG)
 		str = "Error: Missing arguments\n";
 	else if (errno == NO_NUMBER)

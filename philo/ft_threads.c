@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/31 16:45:49 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/08/01 14:11:52 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	*ft_monitor(void *vargp)
 			count = 0;
 		else
 			count++;
+		usleep(500);
 	}
 	return (NULL);
 }
