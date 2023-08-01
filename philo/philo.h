@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 10:45:46 by fkrug             #+#    #+#             */
-/*   Updated: 2023/07/31 15:52:55 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/08/01 17:02:23 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void		ft_sleep(__uint64_t ms);
 __uint64_t	ft_gettime(void);
 void		ft_print_state(t_philo *philo);
 void		ft_action(t_philo *philo);
-void		ft_philo_dead(t_table *table, int count);
+int			ft_check(t_philo *philo);
 void		ft_check_death(t_table *table, int count);
-void		ft_full_behave(t_table *table, int count);
+void		ft_full_behave(t_table *table);
 int			ft_input_test(int argc, char **argv);
 #endif

@@ -6,22 +6,24 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/08/01 15:06:06 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/08/01 17:10:51 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_full_behave(t_table *table, int count)
+void	ft_full_behave(t_table *table)
 {
-	pthread_mutex_lock(&table->lock);
+	pthread_mutex_lock(&table->full);
 	if (table->n_full == table->n_phil)
 	{
+		pthread_mutex_unlock(&table->full);
+		pthread_mutex_lock(&table->lock);
 		table->dead = 1;
-		table->philo[count].died = 1;
-		ft_philo_dead(table, count);
+		pthread_mutex_unlock(&table->lock);
 	}
-	pthread_mutex_unlock(&table->lock);
+	else
+		pthread_mutex_unlock(&table->full);
 }
 
 void	*ft_monitor(void *vargp)
@@ -92,7 +94,10 @@ void	*myphilofunc(void *vargp)
 	if (philo->table->n_phil == 1)
 		return (ft_onephilo(philo));
 	while (!philo->died)
+	{
 		ft_action(philo);
+		usleep(500);
+	}
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 12:03:29 by fkrug             #+#    #+#             */
-/*   Updated: 2023/08/01 15:05:15 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/08/01 17:02:10 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	ft_check_death(t_table *table, int count)
 		if (table->dead == 0)
 		{
 			table->dead = 1;
-			table->philo[count].died = 1;
-			ft_philo_dead(table, count);
 			pthread_mutex_lock(&table->write);
 			printf("%.0f %d %s", ft_gettime() \
 			- table->time_start, table->philo[count].id, "died\n");
@@ -78,20 +76,18 @@ void	ft_check_death(t_table *table, int count)
 		}
 		pthread_mutex_unlock(&table->lock);
 	}
-	ft_full_behave(table, count);
+	ft_full_behave(table);
 	pthread_mutex_unlock(&table->philo[count].lock);
 }
 
-void	ft_philo_dead(t_table *table, int count)
+int	ft_check(t_philo *philo)
 {
-	int	i;
-
-	i = -1;
-	pthread_mutex_lock(&table->full);
-	while (++i < table->n_phil)
+	pthread_mutex_lock(&philo->table->lock);
+	if (philo->table->dead)
 	{
-		if (i != count)
-			table->philo[i].died = 1;
+		philo->died = 1;
+		return (pthread_mutex_unlock(&philo->table->lock), (int) 1);
 	}
-	pthread_mutex_unlock(&table->full);
+	pthread_mutex_unlock(&philo->table->lock);
+	return (0);
 }
