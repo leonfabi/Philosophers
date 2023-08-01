@@ -6,7 +6,7 @@
 /*   By: fkrug <fkrug@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:32:07 by fkrug             #+#    #+#             */
-/*   Updated: 2023/08/01 14:30:34 by fkrug            ###   ########.fr       */
+/*   Updated: 2023/08/01 14:44:26 by fkrug            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*ft_monitor(void *vargp)
 
 	count = 0;
 	table = (t_table *)vargp;
-	ft_sleep(500);
+	ft_sleep(2000);
 	pthread_mutex_lock(&table->lock);
 	table->start = 1;
 	table->time_start = ft_gettime();
